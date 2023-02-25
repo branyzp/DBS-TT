@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import DashboardItems from './DashboardItems';
 import '../css/DashboardPage.css';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Popup from './Popup';
 
 function DashboardPage() {
 	let tempLst = [
@@ -254,34 +255,44 @@ function DashboardPage() {
 		},
 	];
 	let [claimsLst, setClaimsLst] = useState(tempLst);
-	console.log(claimsLst[0]);
+	// console.log(claimsLst[0]);
+	let [newClaimTrigger, setNewClaimTrigger] = useState(false);
+
+	const navigate = useNavigate();
 
 	// let claimsBody = claimsLst && claimsLst.map((claim)=>{
 	//     console.log("hello");
 	//     <DashboardItems ClaimID = {claim.ClaimID} Status = {claim.Status}/>
 	// });
 
-	// useEffect(() => {
-	// 		const fetchData = async () => {
-	// 			await axios
-	// 				.post(view_claims_api, {
-	// 					userid: userdetails[0],
-	// 				})
-	// 				.then((res) => {
-	// 					setClaimsLst(res.data);
-	// 					console.log(res.data);
-	// 				});
-	// 		};
-	// 		fetchData();
-	// 	}, []);
-
 	return (
 		<div className="mainContainer">
 			<div className="dashboardMainHeader">
 				{/* <div></div> */}
 				<div className="pageTitle">DASHBOARD</div>
-				<div className="logoutBtn">Logout</div>
+				<div
+					className="logoutBtn"
+					onClick={() => {
+						navigate('/');
+					}}
+				>
+					Logout
+				</div>
 			</div>
+
+			<div className="claimBtnContainer">
+				{/* <div className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create New Claim</div> */}
+				<button
+					className="newClaimBtn"
+					onClick={() => {
+						setNewClaimTrigger(true);
+					}}
+				>
+					Create new claim
+				</button>
+			</div>
+
+			<Popup trigger={newClaimTrigger} />
 
 			<div className="claimBtnContainer">
 				<button className="newClaimBtn">Create new claim</button>

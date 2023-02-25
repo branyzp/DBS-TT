@@ -1,5 +1,6 @@
 import useInput from "../hooks/use-input";
 import React, { useState } from "react";
+import Dropdown from "./DropDown";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
@@ -46,6 +47,8 @@ const BasicForm = (props) => {
     reset: resetDate,
   } = useInput(isNotEmpty);
 
+  const {hasError: policyHasError, reset: resetPolicy } = useInput(isNotEmpty);
+
   let formIsValid = false;
 
   if (
@@ -73,6 +76,7 @@ const BasicForm = (props) => {
     resetAmount();
     resetPurpose();
     resetDate();
+    resetPolicy();
   };
 
   const firstNameClasses = firstNameHasError
@@ -88,7 +92,23 @@ const BasicForm = (props) => {
     ? "form-control invalid"
     : "form-control";
 
+  const policyClasses = policyHasError
+    ? "form-control invalid"
+    : "form-control";
+
   const dateClasses = dateHasError ? "form-control invalid" : "form-control";
+
+  const options = [
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
+  ];
+
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleDropdownChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   return (
     <form onSubmit={submitHandler}>
@@ -147,7 +167,7 @@ const BasicForm = (props) => {
         )}
       </div>
       <div className={dateClasses}>
-        <label htmlFor="date">Purpose</label>
+        <label htmlFor="date">Date</label>
         <input
           type="date"
           id="Date"
@@ -158,6 +178,15 @@ const BasicForm = (props) => {
         {purposeHasError && (
           <p className="error-text">Please enter a valid date.</p>
         )}
+      </div>
+      <div className={policyClasses}>
+        <label htmlFor="policy">Choose a policy</label>
+        <Dropdown
+          formLabel="Choose a policy"
+          options={options}
+          value={selectedOption}
+          onChange={handleDropdownChange}
+        />
       </div>
       <div className="form-actions">
         <button disabled={!formIsValid}>Submit</button>
