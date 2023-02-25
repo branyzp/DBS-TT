@@ -68,7 +68,7 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
 					/>
 				</Form.Group>
 
-				<Alert variant="danger">Wrong username or password entered.</Alert>
+				{/* <Alert variant="danger">Wrong username or password entered.</Alert> */}
 
 				<Button variant="primary" type="submit">
 					Login
