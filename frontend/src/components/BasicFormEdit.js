@@ -73,6 +73,17 @@ const BasicFormEdit = (props) => {
     console.log("Submitted!");
     console.log(firstNameValue, lastNameValue, amountValue);
 
+    // axios post request to send entire form data to backend
+    axios.post("http://localhost:5000/edit_claim", {
+      ClaimID: props.userInEdit.ClaimID, // ? maybe
+      FirstName: firstNameValue,
+      LastName: lastNameValue,
+      Amount: amountValue,
+      Purpose: purposeValue,
+      Date: dateValue,
+    });
+
+
     resetFirstName();
     resetLastName();
     resetAmount();
@@ -203,7 +214,7 @@ const BasicFormEdit = (props) => {
           // claimsLst={claimsLst} setClaimsLst= {setClaimsLst}
           let newClaimsLst = props.claimsLst.map((claim)=>{
             if(claim.ClaimID === props.userInEdit.ClaimID){
-              claim.FirstName = firstNameValue;
+              claim.FirstName = firstNameValue;   
               claim.LastName = lastNameValue;
               claim.Amount = parseFloat(amountValue);
               claim.Purpose = purposeValue;
