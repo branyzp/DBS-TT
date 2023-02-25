@@ -22,23 +22,19 @@ db = SQLAlchemy(app)
 # Models
 
 # User Model
-class User(db.Model):
+class user(db.Model):
     UserID = db.Column(db.Integer, primary_key=True)
     Password = db.Column(db.String(20), nullable=False)
     FirstName = db.Column(db.String(50), nullable=False)
     LastName = db.Column(db.String(50), nullable=False)
     Age = db.Column(db.Integer, nullable=False)
-    # name = db.Column(db.String(200), nullable=False)
-    # email = db.Column(db.String(120), nullable=False, unique=True)
-    # fav_colour = db.Column(db.String(120))
-    # date_added = db.Column(db.DateTime, default=datetime.utcnow)
 
     # Create A String
     def __repr__(self):
         return '<Name %r>' % self.firstName
 
 # Insurance Policies Model
-class InsurancePolicies(db.Model):
+class insurancepolicies(db.Model):
     InsuranceID = db.Column(db.Integer, primary_key=True)
     EmployeeID = db.Column(
         db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -50,7 +46,7 @@ class InsurancePolicies(db.Model):
 
 class insuranceclaims(db.Model):
     ClaimID = db.Column(db.Integer, primary_key=True)
-    InsuranceID = db.Column(db.Integer, nullable=False)
+    InsuranceID = db.Column(db.Integer, db.ForeignKey('insurancepolicies.id'), nullable=False,)
     FirstName = db.Column(db.Text, nullable=False)
     LastName = db.Column(db.Text)
     ExpenseDate = db.Column(db.Text)
@@ -72,10 +68,15 @@ def index():
     return os.getenv("DATABASE_URL")
 
 # get all claims by claimId
-@app.route('/claims/<int:ClaimID>')
-def get_claims(ClaimID):
-    claims = insuranceclaims.query.filter_by(ClaimID=ClaimID).all()
-    # print(claims)
+@app.route('/claims/<int:employeeID>')
+def get_claims(employeeID):
+    claims = []
+    policies = insurancepolicies.query.filter_by(
+        EmployeeID=employeeID).all()
+
+    for policy in policies:
+        claims += insuranceclaims.query.filter_by(InsuranceID=policy.InsuranceID).all()
+
     return {
         'claims': [
             {
