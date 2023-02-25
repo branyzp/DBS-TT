@@ -37,6 +37,10 @@ class insuranceclaims(db.Model):
 
 ## Routes
 
+@app.route('/')
+def index():
+    return os.getenv("DATABASE_URL")
+
 # get all claims by claimId # TODO: use employeeID
 @app.route('/claims/<int:ClaimID>')
 def get_claims(ClaimID):
