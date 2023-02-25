@@ -103,6 +103,30 @@ def get_claims(employeeID):
         ]
     }
 
+@app.route('/insert_claim', methods=['POST'])
+def insert_claim():
+    claim = request.get_json()
+    # print(claim)
+    new_claim = insuranceclaims(
+        ClaimID = claim['ClaimID'],
+        InsuranceID=claim['InsuranceID'],
+        FirstName=claim['FirstName'],
+        LastName=claim['LastName'],
+        ExpenseDate=claim['ExpenseDate'],
+        Amount=claim['Amount'],
+        Purpose=claim['Purpose'],
+        FollowUp=0,
+        PreviousClaimID=None,
+        Status="Pending",
+        LastEditedClaimDate=datetime.now()
+    )
+    print(new_claim)
+    db.session.add(new_claim)
+    db.session.commit()
+
+    return {
+        'message': 'Claim was added successfully'
+    }
 
 @app.route('/insurances/<int:InsuranceID>')
 def get_policies(InsuranceID):
@@ -179,7 +203,7 @@ def delete_claim(ClaimID):
     }
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)
 
 # User Model
 
