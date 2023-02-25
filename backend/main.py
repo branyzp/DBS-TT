@@ -162,7 +162,7 @@ def edit_claim():
     if 'Status' in data and data['Status']:
         claim.Status = data['Status']
     if 'LastEditedClaimDate' in data and data['LastEditedClaimDate']:
-        claim.LastEditedClaimDate = data['LastEditedClaimDate']
+        claim.LastEditedClaimDate = str(datetime.now())
     db.session.commit()
     return {
         'success': True
