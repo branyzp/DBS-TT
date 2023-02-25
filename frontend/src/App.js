@@ -14,8 +14,8 @@ function App() {
 			<Navbar isAuthenticated={isAuthenticated} />
 			<Routes>
         
-				<Route path="/" element={<DashboardPage />} />
-				<Route />
+				<Route path="/" element={<Login />} />
+				<Route path="/dashboard" element={<DashboardPage />} />
 				<Route />
 			</Routes>
 		</BrowserRouter>
