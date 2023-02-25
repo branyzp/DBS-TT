@@ -259,6 +259,8 @@ function DashboardPage() {
 	// console.log(claimsLst[0]);
 	const [newClaimTrigger, setNewClaimTrigger] = useState(false);
 	const [isloaded, setIsLoaded] = useState(false)
+	let [popupType,setPopupType] = useState("");
+    let [userInEdit,setuserInEdit] = useState({});
 	const navigate = useNavigate();
 
 	// let claimsBody = claimsLst && claimsLst.map((claim)=>{
@@ -322,6 +324,10 @@ function DashboardPage() {
 							className="claimBody"
 							ClaimID={claim.ClaimID}
 							Status={claim.Status}
+							setNewClaimTrigger= {setNewClaimTrigger}
+							setPopupType={setPopupType}
+							setuserInEdit = {setuserInEdit}
+							claimCurrent={claim}
 						/>
 					);
 				})}
