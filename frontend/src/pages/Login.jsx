@@ -11,7 +11,6 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
 	const [username, setusername] = useState({ username: '', dirty: false });
 	const [password, setpassword] = useState({ password: '', dirty: false });
 
-	// const auth = useAuth();
 	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
@@ -37,6 +36,7 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
 		// 		alert(error);
 		// 	});
 		navigate('/dashboard');
+		setIsAuthenticated(true);
 		console.log('username :', username, 'password :', password);
 	};
 
