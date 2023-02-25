@@ -1,8 +1,9 @@
 import os
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from dotenv import load_dotenv
+from flask_cors import CORS, cross_origin
 
 load_dotenv()
 
@@ -14,7 +15,7 @@ app.config['SECRET_KEY'] = "123456"
 
 # Database
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-
+CORS(app)
 # Initialize the database
 db = SQLAlchemy(app)
 
@@ -75,7 +76,9 @@ def index():
 # get all claims by claimId
 
 
-@app.route('/claims/<int:employeeID>')
+@app.route('/claims/<int:employeeID>', methods=['GET'])
+# @cross_origin()
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def get_claims(employeeID):
     claims = []
     policies = insurancepolicies.query.filter_by(
@@ -84,8 +87,8 @@ def get_claims(employeeID):
     for policy in policies:
         claims += insuranceclaims.query.filter_by(
             InsuranceID=policy.InsuranceID).all()
-
-    return {
+    response = jsonify(
+        {
         'claims': [
             {
                 'ClaimID': claim.ClaimID,  # 2010
@@ -101,7 +104,11 @@ def get_claims(employeeID):
                 'LastEditedClaimDate': claim.LastEditedClaimDate
             } for claim in claims
         ]
-    }
+        }
+    )
+    # response.headers.add('Access-Control-Allow-Origin', '*')
+    return response, 200
+
 
 
 @app.route('/insurances/<int:InsuranceID>')

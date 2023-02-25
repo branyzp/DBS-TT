@@ -266,14 +266,12 @@ function DashboardPage() {
 	//     <DashboardItems ClaimID = {claim.ClaimID} Status = {claim.Status}/>
 	// });
 
-	let api = 'localhost:5000';
+	let api = 'http://localhost:5000';
 
 	useEffect(() => {
 		const fetchData = async () => {
 			await axios
-				.post(api + '/claims', {
-					empId: 58001001,
-				})
+				.get(api + '/claims/58001001')
 				.then((res) => {
 					setClaimsLst(res.data);
 					console.log(res.data);
