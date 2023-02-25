@@ -298,21 +298,19 @@ function DashboardPage() {
 
 			<div className="claimBtnContainer">
 				{/* <div className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create New Claim</div> */}
-				<button
-					className="newClaimBtn"
+				<button className="newClaimBtn"
 					onClick={() => {
 						setNewClaimTrigger(true);
-					}}
-				>
+					}}>
 					Create new claim
 				</button>
 			</div>
 
-			<Popup trigger={newClaimTrigger} />
+			<Popup trigger={newClaimTrigger} popupType={popupType} userInEdit={userInEdit} setNewClaimTrigger={setNewClaimTrigger} claimsLst = {claimsLst} setClaimsLst={setClaimsLst}/>
 
-			<div className="claimBtnContainer">
+			{/* <div className="claimBtnContainer">
 				<button className="newClaimBtn">Create new claim</button>
-			</div>
+			</div> */}
 
 			<div className="dashboardMainBody">
 				{/* <DashboardItems ClaimID = {claimsLst[0].ClaimID} Status = {claimsLst[0].Status}/>
