@@ -26,14 +26,19 @@ function Header({ isAuthenticated, setIsAuthenticated, setUserDetails }) {
 			<Navbar bg="light" expand="lg">
 				<Container>
 					<Navbar.Brand>Insurance Claims Portal</Navbar.Brand>
+					{isAuthenticated && (
+						<Nav className="me-auto">
+							<Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+						</Nav>
+					)}
 
-					<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					{/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="me-auto">
 							<Nav.Link onClick={handleLogout}>Logout</Nav.Link>
 						</Nav>
-					</Navbar.Collapse>
+					</Navbar.Collapse> */}
 				</Container>
 			</Navbar>
 		</div>
