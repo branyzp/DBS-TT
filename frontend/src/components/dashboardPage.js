@@ -261,6 +261,11 @@ function DashboardPage() {
     let [popupType,setPopupType] = useState("");
     let [userInEdit,setuserInEdit] = useState({});
 
+    useEffect(() => {
+        // Update the document title using the browser API
+        // document.title = `You clicked ${count} times`;
+      });
+
 	const navigate = useNavigate();
 
 	// let claimsBody = claimsLst && claimsLst.map((claim)=>{
@@ -304,6 +309,7 @@ function DashboardPage() {
 				<button className="newClaimBtn"
 					onClick={() => {
 						setNewClaimTrigger(true);
+                        setPopupType("create");
 					}}>
 					Create new claim
 				</button>
