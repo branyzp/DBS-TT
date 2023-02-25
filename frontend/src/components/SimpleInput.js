@@ -1,4 +1,5 @@
 import useInput from "../hooks/use-input";
+import React from "react";
 
 const SimpleInput = (props) => {
   const {
@@ -30,7 +31,6 @@ const SimpleInput = (props) => {
 
   const {
     value: enteredDate,
-    isValid: enteredDateIsValid,
     hasError: dateInputHasError,
     valueChangeHandler: dateChangeHandler,
     inputBlurHandler: dateBlurHandler,
@@ -116,7 +116,7 @@ const SimpleInput = (props) => {
         )}
       </div>
       <div className={dateInputClasses}>
-        <label htmlFor="date">Purpose</label>
+        <label htmlFor="date">Date</label>
         <input
           type="date"
           id="Date"
@@ -134,5 +134,3 @@ const SimpleInput = (props) => {
     </form>
   );
 };
-
-export default SimpleInput;
