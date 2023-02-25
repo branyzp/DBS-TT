@@ -1,7 +1,7 @@
 import useInput from "../hooks/use-input";
 import React, { useState } from "react";
 
-const SimpleInput = (props) => {
+const BasicForm = (props) => {
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -136,3 +136,4 @@ const SimpleInput = (props) => {
   );
 };
 
+export default BasicForm;

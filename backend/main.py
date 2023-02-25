@@ -111,6 +111,8 @@ def get_claims(employeeID):
 
 
 @app.route('/insert_claim', methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+
 def insert_claim():
     claim = request.get_json()
     # print(claim)
@@ -172,6 +174,8 @@ def get_users(EmployeeID):
     }
 
 @app.route('/edit_claim', methods=['PUT'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+
 def edit_claim():
     data = request.get_json()
     claim = insuranceclaims.query.get(data['ClaimID'])
