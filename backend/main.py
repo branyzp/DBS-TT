@@ -1,11 +1,5 @@
-from flask import Flask, render_template, flash, request
-# from flask_wtf import FlaskForm
-# from wtforms import StringField, SubmitField
-# from wtforms.validators import DataRequired
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import json
-# from flask_migrate import Migrate
-from datetime import datetime   
 
 # Create a Flask Instance
 app = Flask(__name__)
@@ -13,23 +7,8 @@ app = Flask(__name__)
 # Secret Key
 app.config['SECRET_KEY'] = "123456"
 
-# Old sqlite Database
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-
-# New MySQL Database
-# Command to create db BELOW:
-# python
-# >>> from hello import app, db
-# >>> app.app_context().push()
-# >>> db.create_all()
-# >>> exit()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost:3306/insurancedata'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@localhost'
-
-
 # Initialize the database
 db = SQLAlchemy(app)
-# migrate = Migrate(app, db)
 
 
 class insuranceclaims(db.Model):
@@ -45,21 +24,6 @@ class insuranceclaims(db.Model):
     Status = db.Column(db.Text)
     LastEditedClaimDate = db.Column(db.Text)
 
-    # def __repr__(self):
-    #     return {
-    #         'ClaimID': self.ClaimID,
-    #         'InsuranceID': self.InsuranceID,
-    #         'FirstName': self.FirstName,
-    #         'LastName': self.LastName,
-    #         'ExpenseDate': self.ExpenseDate,
-    #         'Amount': self.Amount,
-    #         'Purpose': self.Purpose,
-    #         'FollowUp': self.FollowUp,
-    #         'PreviousClaimID': self.PreviousClaimID,
-    #         'Status': self.Status,
-    #         'LastEditedClaimDate': self.LastEditedClaimDate
-    #     }
-    # # Create A String
     def __repr__(self):
         return '<claimId %r>' % self.ClaimID
 
@@ -67,8 +31,7 @@ class insuranceclaims(db.Model):
 @app.route('/claims/<int:ClaimID>')
 def get_claims(ClaimID):
     claims = insuranceclaims.query.filter_by(ClaimID=ClaimID).all()
-    print(claims)
-    # return (claims)
+    # print(claims)
     return {
         'claims': [
             {
@@ -86,7 +49,6 @@ def get_claims(ClaimID):
             } for claim in claims
         ]
     }
-    # return {'claims': [json.dump(claim, 4) for claim in claims]}
 
 if __name__ == '__main__':
     app.run(debug=True)
