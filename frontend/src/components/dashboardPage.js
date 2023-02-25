@@ -257,6 +257,8 @@ function DashboardPage() {
     let [claimsLst,setClaimsLst] = useState(tempLst);
     // console.log(claimsLst[0]);
     let [newClaimTrigger,setNewClaimTrigger] = useState(false);
+    let [popupType,setPopupType] = useState("");
+    let [userInEdit,setuserInEdit] = useState({});
 
     const navigate = useNavigate();
 
@@ -276,16 +278,16 @@ function DashboardPage() {
 
         <div className='claimBtnContainer'>
             {/* <div className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create New Claim</div> */}
-            <button className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create new claim</button>
+            <button className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true); setPopupType("create");}}>Create new claim</button>
         </div>
         
-        <Popup trigger={newClaimTrigger}/>
+        <Popup trigger={newClaimTrigger} popupType = {popupType} userInEdit={userInEdit}/>
 
         <div className='dashboardMainBody'>
             {/* <DashboardItems ClaimID = {claimsLst[0].ClaimID} Status = {claimsLst[0].Status}/>
             <DashboardItems/> */}
             {claimsLst.map((claim)=>{
-                return <DashboardItems className="claimBody" ClaimID = {claim.ClaimID} Status = {claim.Status}/>
+                return <DashboardItems className="claimBody" ClaimID = {claim.ClaimID} Status = {claim.Status} setNewClaimTrigger= {setNewClaimTrigger} setPopupType={setPopupType} setuserInEdit = {setuserInEdit} claimCurrent={claim}/>
                 })}
         </div>
       

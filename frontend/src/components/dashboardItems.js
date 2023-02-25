@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/DashboardItems.css';
 
-function DashboardItems({ClaimID, Status}) {
+function DashboardItems({ClaimID, Status,setNewClaimTrigger,setPopupType,setuserInEdit,claimCurrent}) {
   return (
     <div className='DashboardItemsContainer'>
       <div className='dashboardItemsBody'>
@@ -9,7 +9,7 @@ function DashboardItems({ClaimID, Status}) {
         <div>Status: {Status}</div>
       </div>
       <div className='dashboardItemsButtons'>
-        <button>Edit</button>
+        <button onClick={()=>{setNewClaimTrigger(true); setPopupType("edit");setuserInEdit(claimCurrent);}}>Edit</button>
       </div>
     </div>
   )

@@ -1,16 +1,29 @@
 import React from 'react'
 import '../css/Popup.css';
 import BasicForm from './BasicForm';
+import BasicFormEdit from './BasicFormEdit';
 
-function Popup({trigger}) {
+function Popup({trigger, popupType,userInEdit}) {
     if(trigger){
-        return (
-            <div className='popup'>
-              <div className='popup-inner'>
-                <BasicForm/>
-              </div>
-            </div>
-          )
+        if(popupType === "create"){
+            return (
+                <div className='popup'>
+                  <div className='popup-inner'>
+                    <BasicForm userInEdit={userInEdit}/>
+                  </div>
+                </div>
+              )
+        }
+        else{
+            return(
+                <div className='popup'>
+                  <div className='popup-inner'>
+                    <BasicFormEdit />
+                  </div>
+                </div>
+            )
+        }
+
     }else{
         return(
             <div></div>
