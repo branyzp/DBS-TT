@@ -1,14 +1,18 @@
 import React from 'react'
+import '../css/DashboardItems.css';
 
-function dashboardItems() {
+function DashboardItems({ClaimID, Status}) {
   return (
-    <div>
+    <div className='DashboardItemsContainer'>
       <div className='dashboardItemsBody'>
-        
+        <div>ClaimId: {ClaimID}</div>
+        <div>Status: {Status}</div>
       </div>
-      <div className='dashboardItemsButtons'></div>
+      <div className='dashboardItemsButtons'>
+        <button>Edit</button>
+      </div>
     </div>
   )
 }
 
-export default dashboardItems
+export default DashboardItems
