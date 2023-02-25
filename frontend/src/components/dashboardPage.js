@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardItems from './DashboardItems';
 import '../css/DashboardPage.css';
 import { useNavigate } from 'react-router-dom';
 import Popup from './Popup';
+import axios from 'axios';
 
 function DashboardPage() {
 	let tempLst = [
@@ -264,6 +265,22 @@ function DashboardPage() {
 	//     console.log("hello");
 	//     <DashboardItems ClaimID = {claim.ClaimID} Status = {claim.Status}/>
 	// });
+
+	let api = 'localhost:5000';
+
+	useEffect(() => {
+		const fetchData = async () => {
+			await axios
+				.post(api + '/claims', {
+					empId: 58001001,
+				})
+				.then((res) => {
+					setClaimsLst(res.data);
+					console.log(res.data);
+				});
+		};
+		fetchData();
+	}, []);
 
 	return (
 		<div className="mainContainer">
