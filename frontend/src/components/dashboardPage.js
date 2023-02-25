@@ -274,12 +274,13 @@ function DashboardPage() {
 				.get(api + '/claims/58001001')
 				.then((res) => {
 					setClaimsLst(res.data);
+					setIsLoaded(true);
 					console.log(res.data);
 				});
 		};
 		fetchData();
 	}, []);
-	return (!isloaded ? <div>Loading...</div> :
+	return (!isloaded ? <div>Loading r...</div> :
 
 		<div className="mainContainer">
 			<div className="dashboardMainHeader">
