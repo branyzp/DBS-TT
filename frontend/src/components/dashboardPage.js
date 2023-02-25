@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import DashboardItems from './DashboardItems';
 import '../css/DashboardPage.css';
+import { useNavigate } from 'react-router-dom';
+import Popup from './Popup';
 
 function DashboardPage() {
     let tempLst = [
@@ -253,7 +255,10 @@ function DashboardPage() {
         }
     ];
     let [claimsLst,setClaimsLst] = useState(tempLst);
-    console.log(claimsLst[0]);
+    // console.log(claimsLst[0]);
+    let [newClaimTrigger,setNewClaimTrigger] = useState(false);
+
+    const navigate = useNavigate();
 
     // let claimsBody = claimsLst && claimsLst.map((claim)=>{
     //     console.log("hello");
@@ -266,13 +271,15 @@ function DashboardPage() {
         <div className='dashboardMainHeader'>
             {/* <div></div> */}
             <div className='pageTitle'>DASHBOARD</div>
-            <div className='logoutBtn'>Logout</div>
+            <div className='logoutBtn' onClick={()=>{navigate('/');}}>Logout</div>
         </div>
 
         <div className='claimBtnContainer'>
-            <button className='newClaimBtn'>Create new claim</button>
+            <div className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create New Claim</div>
+            {/* <button className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create new claim</button> */}
         </div>
         
+        <Popup trigger={newClaimTrigger}/>
 
         <div className='dashboardMainBody'>
             {/* <DashboardItems ClaimID = {claimsLst[0].ClaimID} Status = {claimsLst[0].Status}/>

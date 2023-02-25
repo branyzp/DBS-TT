@@ -21,11 +21,6 @@
     cursor: pointer;
 }
 
-.claimBtnContainer{
-    display: flex;
-    justify-content: center;
-}
-
 .claimBody{
     min-width: 0;
 }
@@ -40,5 +35,19 @@
 }
 
 .newClaimBtn{
-    /* align-items: center; */
+    
+
+    width: 20px;
+    font-size: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.claimBtnContainer{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-width: 2px;
+    border-style: solid;
+    
 }
