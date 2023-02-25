@@ -156,7 +156,7 @@ const BasicForm = (props) => {
           onBlur={dateBlurHandler}
         />
         {purposeHasError && (
-          <p className="error-text">Please enter a valid purpose.</p>
+          <p className="error-text">Please enter a valid date.</p>
         )}
       </div>
       <div className="form-actions">
