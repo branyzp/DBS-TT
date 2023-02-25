@@ -198,6 +198,14 @@ const BasicFormEdit = (props) => {
         >
           Cancel
         </button>
+        <button onClick={()=>{
+          props.setClaimsLst(oldLst => oldLst.filter((claim)=>{
+            if(claim.ClaimID !== props.userInEdit.ClaimID){
+              return claim;
+            }
+          }))
+          props.setNewClaimTrigger(false);
+        }}>Delete</button>
       <div className="form-actions">
         <button disabled={!formIsValid} onClick={()=>{
           // claimsLst={claimsLst} setClaimsLst= {setClaimsLst}
