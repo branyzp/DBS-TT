@@ -46,7 +46,7 @@ class insurancepolicies(db.Model):
 
 class insuranceclaims(db.Model):
     ClaimID = db.Column(db.Integer, primary_key=True)
-    InsuranceID = db.Column(db.Integer, db.ForeignKey('insurancepolicies.id'), nullable=False,)
+    InsuranceID = db.Column(db.Integer, db.ForeignKey('insurancepolicies.InsuranceID'), nullable=False,)
     FirstName = db.Column(db.Text, nullable=False)
     LastName = db.Column(db.Text)
     ExpenseDate = db.Column(db.Text)
@@ -95,8 +95,34 @@ def get_claims(employeeID):
         ]
     }
 
+@app.route('/insert_claim', methods=['POST'])
+def insert_claim():
+    claim = request.get_json()
+    # print(claim)
+    new_claim = insuranceclaims(
+        ClaimID = claim['ClaimID'],
+        InsuranceID=claim['InsuranceID'],
+        FirstName=claim['FirstName'],
+        LastName=claim['LastName'],
+        ExpenseDate=claim['ExpenseDate'],
+        Amount=claim['Amount'],
+        Purpose=claim['Purpose'],
+        FollowUp=0,
+        PreviousClaimID=None,
+        Status="Pending",
+        LastEditedClaimDate=datetime.now()
+    )
+    print(new_claim)
+    db.session.add(new_claim)
+    db.session.commit()
+
+    return {
+        'message': 'Claim was added successfully'
+    }
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
 
 # User Model
 
