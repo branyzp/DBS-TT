@@ -18,7 +18,36 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 # Initialize the database
 db = SQLAlchemy(app)
 
+
 # Models
+
+# User Model
+class User(db.Model):
+    UserID = db.Column(db.Integer, primary_key=True)
+    Password = db.Column(db.String(20), nullable=False)
+    FirstName = db.Column(db.String(50), nullable=False)
+    LastName = db.Column(db.String(50), nullable=False)
+    Age = db.Column(db.Integer, nullable=False)
+    # name = db.Column(db.String(200), nullable=False)
+    # email = db.Column(db.String(120), nullable=False, unique=True)
+    # fav_colour = db.Column(db.String(120))
+    # date_added = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Create A String
+    def __repr__(self):
+        return '<Name %r>' % self.firstName
+
+# Insurance Policies Model
+class InsurancePolicies(db.Model):
+    InsuranceID = db.Column(db.Integer, primary_key=True)
+    EmployeeID = db.Column(
+        db.Integer, db.ForeignKey('user.id'), nullable=False)
+    PolicyTerm = db.Column(db.String(100), nullable=False)
+    PolicyStartDate = db.Column(db.String(255), nullable=False)
+    PolicyEndDate = db.Column(db.String(255), nullable=False)
+    ClaimLimit = db.Column(db.Float, nullable=False)
+    RemainingClaimLimit = db.Column(db.Float, nullable=False)
+
 class insuranceclaims(db.Model):
     ClaimID = db.Column(db.Integer, primary_key=True)
     InsuranceID = db.Column(db.Integer, nullable=False)
@@ -35,28 +64,12 @@ class insuranceclaims(db.Model):
     def repr(self):
         return '<claimId %r>' % self.ClaimID
 
+
 ## Routes
 
 @app.route('/')
 def index():
     return os.getenv("DATABASE_URL")
-
-# get all claims by claimId # TODO: use employeeID
-class insuranceclaims(db.Model):
-    ClaimID = db.Column(db.Integer, primary_key=True)
-    InsuranceID = db.Column(db.Integer, nullable=False)
-    FirstName = db.Column(db.Text, nullable=False)
-    LastName = db.Column(db.Text)
-    ExpenseDate = db.Column(db.Text)
-    Amount = db.Column(db.Float)
-    Purpose = db.Column(db.Text)
-    FollowUp = db.Column(db.Boolean)
-    PreviousClaimID = db.Column(db.Integer)
-    Status = db.Column(db.Text)
-    LastEditedClaimDate = db.Column(db.Text)
-
-    def __repr__(self):
-        return '<claimId %r>' % self.ClaimID
 
 # get all claims by claimId
 @app.route('/claims/<int:ClaimID>')
@@ -87,48 +100,7 @@ if __name__ == '__main__':
 # User Model
 
 
-class User(db.Model):
-    UserID = db.Column(db.Integer, primary_key=True)
-    Password = db.Column(db.String(20), nullable=False)
-    FirstName = db.Column(db.String(50), nullable=False)
-    LastName = db.Column(db.String(50), nullable=False)
-    Age = db.Column(db.Integer, nullable=False)
-    # name = db.Column(db.String(200), nullable=False)
-    # email = db.Column(db.String(120), nullable=False, unique=True)
-    # fav_colour = db.Column(db.String(120))
-    # date_added = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # Create A String
-    def __repr__(self):
-        return '<Name %r>' % self.firstName
-
-
-# Insurance Policies Model
-class InsurancePolicies(db.Model):
-    InsuranceID = db.Column(db.Integer, primary_key=True)
-    EmployeeID = db.Column(
-        db.Integer, db.ForeignKey('user.id'), nullable=False)
-    PolicyTerm = db.Column(db.String(100), nullable=False)
-    PolicyStartDate = db.Column(db.String(255), nullable=False)
-    PolicyEndDate = db.Column(db.String(255), nullable=False)
-    ClaimLimit = db.Column(db.Float, nullable=False)
-    RemainingClaimLimit = db.Column(db.Float, nullable=False)
-
-
-# Insurance Claims Model
-class InsuranceClaims(db.Model):
-    ClaimID = db.Column(db.Integer, primary_key=True)
-    InsuranceID = db.Column(
-        db.Integer, db.ForeignKey('insurancepolicies.id'), nullable=False)
-    FirstName = db.Column(db.String(50), nullable=False)
-    LastName = db.Column(db.String(50), nullable=False)
-    ExpenseDate = db.Column(db.String(255), nullable=False)
-    Amount = db.Column(db.Float, nullable=False)
-    Purpose = db.Column(db.String(255), nullable=False)
-    FollowUp = db.Column(db.Float, nullable=False)
-    PreviousClaimID = db.Column(db.Integer)
-    Status = db.Column(db.String(20), nullable=False)
-    LastEditedClaimDate = db.Column(db.String(255), nullable=False)
 
 
 
