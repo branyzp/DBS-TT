@@ -3,13 +3,14 @@ import '../css/Popup.css';
 import BasicForm from './BasicForm';
 import BasicFormEdit from './BasicFormEdit';
 
-function Popup({trigger, popupType,userInEdit}) {
+
+function Popup({trigger, popupType,userInEdit,setNewClaimTrigger}) {
     if(trigger){
         if(popupType === "create"){
             return (
                 <div className='popup'>
                   <div className='popup-inner'>
-                    <BasicForm userInEdit={userInEdit}/>
+                    <BasicForm userInEdit={userInEdit} setNewClaimTrigger={setNewClaimTrigger}/>
                   </div>
                 </div>
               )
@@ -18,7 +19,7 @@ function Popup({trigger, popupType,userInEdit}) {
             return(
                 <div className='popup'>
                   <div className='popup-inner'>
-                    <BasicFormEdit />
+                    <BasicFormEdit userInEdit={userInEdit}/>
                   </div>
                 </div>
             )

@@ -14,6 +14,7 @@ const BasicFormEdit = (props) => {
     inputBlurHandler: firstNameBlurHandler,
     reset: resetFirstName,
   } = useInput(isNotEmpty,props.userInEdit.FirstName);
+  // console.log(props.userInEdit.FirstName)
   const {
     value: lastNameValue,
     isValid: lastNameIsValid,
@@ -21,7 +22,7 @@ const BasicFormEdit = (props) => {
     valueChangeHandler: lastNameChangeHandler,
     inputBlurHandler: lastNameBlurHandler,
     reset: resetLastName,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty, props.userInEdit.LastName);
   const {
     value: amountValue,
     isValid: amountIsValid,
@@ -29,7 +30,7 @@ const BasicFormEdit = (props) => {
     valueChangeHandler: amountChangeHandler,
     inputBlurHandler: amountBlurHandler,
     reset: resetAmount,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty,props.userInEdit.Amount&&props.userInEdit.Amount.toString());
   const {
     value: purposeValue,
     isValid: purposeIsValid,
@@ -37,7 +38,7 @@ const BasicFormEdit = (props) => {
     valueChangeHandler: purposeChangeHandler,
     inputBlurHandler: purposeBlurHandler,
     reset: resetPurpose,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty,props.userInEdit.Purpose);
 
   const {
     value: dateValue,

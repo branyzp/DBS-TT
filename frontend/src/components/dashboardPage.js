@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import DashboardItems from './DashboardItems';
 import '../css/DashboardPage.css';
 import { useNavigate } from 'react-router-dom';
 import Popup from './Popup';
+import axios from 'axios';
 
 function DashboardPage() {
     let tempLst = [
@@ -260,31 +261,62 @@ function DashboardPage() {
     let [popupType,setPopupType] = useState("");
     let [userInEdit,setuserInEdit] = useState({});
 
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
-    // let claimsBody = claimsLst && claimsLst.map((claim)=>{
-    //     console.log("hello");
-    //     <DashboardItems ClaimID = {claim.ClaimID} Status = {claim.Status}/>
-    // });
+	// let claimsBody = claimsLst && claimsLst.map((claim)=>{
+	//     console.log("hello");
+	//     <DashboardItems ClaimID = {claim.ClaimID} Status = {claim.Status}/>
+	// });
 
-  return (
-    <div className='mainContainer'>
-        
-        <div className='dashboardMainHeader'>
-            {/* <div></div> */}
-            <div className='pageTitle'>DASHBOARD</div>
-            <div className='logoutBtn' onClick={()=>{navigate('/');}}>Logout</div>
-        </div>
+	let api = 'localhost:5000';
 
-        <div className='claimBtnContainer'>
-            {/* <div className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create New Claim</div> */}
-            <button className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true); setPopupType("create");}}>Create new claim</button>
-        </div>
-        
-        <Popup trigger={newClaimTrigger} popupType = {popupType} userInEdit={userInEdit}/>
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		await axios
+	// 			.post(api + '/claims', {
+	// 				empId: 58001001,
+	// 			})
+	// 			.then((res) => {
+	// 				setClaimsLst(res.data);
+	// 				console.log(res.data);
+	// 			});
+	// 	};
+	// 	fetchData();
+	// }, []);
 
-        <div className='dashboardMainBody'>
-            {/* <DashboardItems ClaimID = {claimsLst[0].ClaimID} Status = {claimsLst[0].Status}/>
+	return (
+		<div className="mainContainer">
+			<div className="dashboardMainHeader">
+				{/* <div></div> */}
+				<div className="pageTitle">DASHBOARD</div>
+				<div
+					className="logoutBtn"
+					onClick={() => {
+						navigate('/');
+					}}
+				>
+					Logout
+				</div>
+			</div>
+
+			<div className="claimBtnContainer">
+				{/* <div className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create New Claim</div> */}
+				<button className="newClaimBtn"
+					onClick={() => {
+						setNewClaimTrigger(true);
+					}}>
+					Create new claim
+				</button>
+			</div>
+
+			<Popup trigger={newClaimTrigger} popupType={popupType} userInEdit={userInEdit} setNewClaimTrigger={setNewClaimTrigger}/>
+
+			{/* <div className="claimBtnContainer">
+				<button className="newClaimBtn">Create new claim</button>
+			</div> */}
+
+			<div className="dashboardMainBody">
+				{/* <DashboardItems ClaimID = {claimsLst[0].ClaimID} Status = {claimsLst[0].Status}/>
             <DashboardItems/> */}
             {claimsLst.map((claim)=>{
                 return <DashboardItems className="claimBody" ClaimID = {claim.ClaimID} Status = {claim.Status} setNewClaimTrigger= {setNewClaimTrigger} setPopupType={setPopupType} setuserInEdit = {setuserInEdit} claimCurrent={claim}/>
@@ -295,4 +327,4 @@ function DashboardPage() {
   )
 }
 
-export default DashboardPage
+export default DashboardPage;

@@ -1,5 +1,5 @@
 import useInput from "../hooks/use-input";
-import React from "react";
+import React, { useState } from "react";
 
 const SimpleInput = (props) => {
   const {
@@ -31,6 +31,7 @@ const SimpleInput = (props) => {
 
   const {
     value: enteredDate,
+    isValid: enteredDateIsValid,
     hasError: dateInputHasError,
     valueChangeHandler: dateChangeHandler,
     inputBlurHandler: dateBlurHandler,

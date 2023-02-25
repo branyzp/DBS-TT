@@ -8,13 +8,25 @@ import { useState } from 'react';
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [userDetails, setUserDetails] = useState(null);
 
 	return (
 		<BrowserRouter>
-			<Navbar isAuthenticated={isAuthenticated} />
+			<Navbar
+				isAuthenticated={isAuthenticated}
+				setIsAuthenticated={setIsAuthenticated}
+				setUserDetails={setUserDetails}
+			/>
 			<Routes>
-        
-				<Route path="/" element={<Login />} />
+				<Route
+					path="/"
+					element={
+						<Login
+							isAuthenticated={isAuthenticated}
+							setIsAuthenticated={setIsAuthenticated}
+						/>
+					}
+				/>
 				<Route path="/dashboard" element={<DashboardPage />} />
 				<Route />
 			</Routes>
