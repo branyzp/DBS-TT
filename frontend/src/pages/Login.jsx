@@ -7,7 +7,7 @@ import { Alert } from 'react-bootstrap';
 // import { useAuth } from '../contexts/AuthContext';
 let API_URL = '/api/login';
 
-function Login() {
+function Login({ isAuthenticated, setIsAuthenticated }) {
 	const [username, setusername] = useState({ username: '', dirty: false });
 	const [password, setpassword] = useState({ password: '', dirty: false });
 
@@ -16,10 +16,27 @@ function Login() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		axios.post(API_URL, {
-			username: username,
-			password: password,
-		});
+		// axios
+		// 	.post(API_URL, {
+		// 		username: username.username,
+		// 		password: password.password,
+		// 	})
+		// 	.then((res) => {
+		// 		console.log(res);
+		// 		//? if user is authenticated, set global state isAuthenticated to true
+		// 		if (res.data.employeeID) {
+		// 			setIsAuthenticated(true);
+		// 			navigate('/dashboard');
+		// 			alert('Logged in successfully');
+		// 		} else {
+		// 			alert('Login failed');
+		// 		}
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error);
+		// 		alert(error);
+		// 	});
+		console.log('username :', username, 'password :', password);
 	};
 
 	return (
@@ -50,7 +67,7 @@ function Login() {
 					/>
 				</Form.Group>
 
-				<Alert variant="danger">Hi</Alert>
+				<Alert variant="danger">Wrong username or password entered.</Alert>
 
 				<Button variant="primary" type="submit">
 					Login
