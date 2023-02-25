@@ -1,0 +1,37 @@
+.dashboardItemsBody{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.DashboardItemsContainer{
+    /* background-color: grey; */
+    /* border-width: 1px;
+    border-color:#F4442E;
+    border-style: solid; */
+    background-color: #FFE8D1;
+    
+    height: 15%;
+    width: 15%;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+
+    border-radius: 5%;
+}
+
+.dashboardItemsButtons{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}

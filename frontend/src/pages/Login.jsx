@@ -11,7 +11,6 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
 	const [username, setusername] = useState({ username: '', dirty: false });
 	const [password, setpassword] = useState({ password: '', dirty: false });
 
-	// const auth = useAuth();
 	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
@@ -36,6 +35,8 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
 		// 		console.log(error);
 		// 		alert(error);
 		// 	});
+		navigate('/dashboard');
+		setIsAuthenticated(true);
 		console.log('username :', username, 'password :', password);
 	};
 
@@ -67,7 +68,7 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
 					/>
 				</Form.Group>
 
-				<Alert variant="danger">Wrong username or password entered.</Alert>
+				{/* <Alert variant="danger">Wrong username or password entered.</Alert> */}
 
 				<Button variant="primary" type="submit">
 					Login
