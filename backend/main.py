@@ -169,6 +169,15 @@ def edit_claim():
     }
 
 
+@app.route('/delete_claim/<int:ClaimID>', methods=['DELETE'])
+def delete_claim(ClaimID):
+    claim = insuranceclaims.query.filter_by(ClaimID=ClaimID).first()
+    db.session.delete(claim)
+    db.session.commit()
+    return {
+        'success': True
+    }
+
 if __name__ == '__main__':
     app.run(debug=True)
 
