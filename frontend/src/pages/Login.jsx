@@ -36,6 +36,7 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
 		// 		console.log(error);
 		// 		alert(error);
 		// 	});
+		navigate('/dashboard');
 		console.log('username :', username, 'password :', password);
 	};
 
