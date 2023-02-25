@@ -22,8 +22,8 @@ db = SQLAlchemy(app)
 # Models
 
 # User Model
-class User(db.Model):
-    UserID = db.Column(db.Integer, primary_key=True)
+class user(db.Model):
+    EmployeeID = db.Column(db.Integer, primary_key=True)
     Password = db.Column(db.String(20), nullable=False)
     FirstName = db.Column(db.String(50), nullable=False)
     LastName = db.Column(db.String(50), nullable=False)
@@ -38,19 +38,24 @@ class User(db.Model):
         return '<Name %r>' % self.firstName
 
 # Insurance Policies Model
-class InsurancePolicies(db.Model):
+
+
+class insurancepolicies(db.Model):
     InsuranceID = db.Column(db.Integer, primary_key=True)
     EmployeeID = db.Column(
         db.Integer, db.ForeignKey('user.id'), nullable=False)
+    InsuranceType = db.Column(db.String(100), nullable=False)
     PolicyTerm = db.Column(db.String(100), nullable=False)
     PolicyStartDate = db.Column(db.String(255), nullable=False)
     PolicyEndDate = db.Column(db.String(255), nullable=False)
     ClaimLimit = db.Column(db.Float, nullable=False)
     RemainingClaimLimit = db.Column(db.Float, nullable=False)
 
+
 class insuranceclaims(db.Model):
     ClaimID = db.Column(db.Integer, primary_key=True)
-    InsuranceID = db.Column(db.Integer, nullable=False)
+    InsuranceID = db.Column(db.Integer, db.ForeignKey(
+        'insurancepolicies.id'), nullable=False)
     FirstName = db.Column(db.Text, nullable=False)
     LastName = db.Column(db.Text)
     ExpenseDate = db.Column(db.Text)
@@ -65,13 +70,15 @@ class insuranceclaims(db.Model):
         return '<claimId %r>' % self.ClaimID
 
 
-## Routes
+# Routes
 
 @app.route('/')
 def index():
     return os.getenv("DATABASE_URL")
 
 # get all claims by claimId
+
+
 @app.route('/claims/<int:ClaimID>')
 def get_claims(ClaimID):
     claims = insuranceclaims.query.filter_by(ClaimID=ClaimID).all()
@@ -79,7 +86,7 @@ def get_claims(ClaimID):
     return {
         'claims': [
             {
-                'ClaimID': claim.ClaimID,
+                'ClaimID': claim.ClaimID,  # 2010
                 'InsuranceID': claim.InsuranceID,
                 'FirstName': claim.FirstName,
                 'LastName': claim.LastName,
@@ -94,14 +101,48 @@ def get_claims(ClaimID):
         ]
     }
 
+
+@app.route('/insurances/<int:InsuranceID>')
+def get_policies(InsuranceID):
+    insurances = insurancepolicies.query.filter_by(
+        InsuranceID=InsuranceID).all()
+    return {
+        'Policies': [
+            {
+                "InsuranceID": insurance.InsuranceID,  # 1005
+                "EmployeeID": insurance.EmployeeID,
+                "Insurance Type": insurance.InsuranceType,
+                "PolicyStartDate": insurance.PolicyStartDate,
+                "PolicyTerm": insurance.PolicyTerm,
+                "PolicyEndDate": insurance.PolicyEndDate,
+                "ClaimLimit": insurance.ClaimLimit,
+                "RemainingClaimLimit": insurance.RemainingClaimLimit
+            } for insurance in insurances
+        ]
+    }
+
+
+@app.route('/users/<int:EmployeeID>')
+def get_users(EmployeeID):
+    users = user.query.filter_by(
+        EmployeeID=EmployeeID).all()
+    return {
+        'Users': [
+            {
+                "EmployeeID": users.EmployeeID,  # 58001001
+                "Password": users.Password,
+                "FirstName": users.FirstName,
+                "LastName": users.LastName,
+                "Age": users.Age
+            } for users in users
+        ]
+    }
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
 # User Model
-
-
-
-
 
 
 # @app.route('/')
