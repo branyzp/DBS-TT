@@ -1,0 +1,44 @@
+.dashboardMainBody{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-flow: row wrap;
+
+}
+
+.pageTitle{
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.logoutBtn{
+    color: red;
+    text-decoration: underline;
+}
+
+.logoutBtn:hover{
+    opacity: 60%;
+    cursor: pointer;
+}
+
+.claimBtnContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.claimBody{
+    min-width: 0;
+}
+
+.dashboardMainHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 50px;
+    margin-left: 50px;
+    align-items: center;
+    
+}
+
+.newClaimBtn{
+    /* align-items: center; */
+}
