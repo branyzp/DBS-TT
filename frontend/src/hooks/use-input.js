@@ -18,10 +18,15 @@ const inputStateReducer = (state, action) => {
   return inputStateReducer;
 };
 
-const useInput = (validateValue) => {
+const useInput = (validateValue, initialValue = "") => {
+  const _initialInputState = { ...initialInputState };
+  if (initialValue) {
+    _initialInputState.value = initialValue;
+  }
+
   const [inputState, dispatch] = useReducer(
     inputStateReducer,
-    initialInputState
+    _initialInputState
   );
 
   const valueIsValid = validateValue(inputState.value);
@@ -48,5 +53,4 @@ const useInput = (validateValue) => {
     reset,
   };
 };
-
 export default useInput;
