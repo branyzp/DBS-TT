@@ -1,11 +1,14 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 // import { useAuth } from '../contexts/AuthContext';
+let API_URL = '/api/login';
 
 function Login() {
-	const [email, setemail] = useState({ email: '', dirty: false });
+	const [username, setusername] = useState({ username: '', dirty: false });
 	const [password, setpassword] = useState({ password: '', dirty: false });
 
 	// const auth = useAuth();
@@ -13,29 +16,25 @@ function Login() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// 	auth.Login(email, password).then(
-		// 		() => {
-		// 			navigate('/');
-		// 		},
-		// 		(err) => {
-		// 			console.log(err);
-		// 		}
-		// 	);
+		axios.post(API_URL, {
+			username: username,
+			password: password,
+		});
 	};
 
 	return (
 		<div className="formcard">
 			<h1>Login Form</h1>
 			<Form onSubmit={handleSubmit}>
-				<Form.Group className="mb-3" controlId="formBasicEmail">
-					<Form.Label>Email address</Form.Label>
+				<Form.Group className="mb-3" controlId="formBasicUsername">
+					<Form.Label>Username</Form.Label>
 					<Form.Control
 						onChange={(e) => {
-							setemail({ email: e.target.value, dirty: true });
-							console.log(email);
+							setusername({ username: e.target.value, dirty: true });
+							console.log(username);
 						}}
-						type="email"
-						placeholder="Enter email"
+						type="username"
+						placeholder="Enter username"
 					/>
 				</Form.Group>
 
@@ -50,6 +49,8 @@ function Login() {
 						placeholder="Password"
 					/>
 				</Form.Group>
+
+				<Alert variant="danger">Hi</Alert>
 
 				<Button variant="primary" type="submit">
 					Login
