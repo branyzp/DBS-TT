@@ -1,9 +1,5 @@
-from flask import Flask, render_template, flash, request
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from datetime import datetime
 
 # Create a Flask Instance
@@ -23,12 +19,11 @@ app.config['SECRET_KEY'] = "123456"
 # >>> db.create_all()
 # >>> exit()
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@localhost/db_name'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/users'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password123@localhost/users'
 
 
 # Initialize the database
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 
 @app.route('/delete/<int:id>')
@@ -70,14 +65,6 @@ class Users(db.Model):
         return '<Name %r>' % self.name
 
 
-# Create form class
-class UserForm(FlaskForm):
-    name = StringField("Name", validators=[DataRequired()])
-    email = StringField("Email", validators=[DataRequired()])
-    fav_colour = StringField("Favourite Colour")
-    submit = SubmitField("Submit")
-
-
 # Update Database Record
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
@@ -107,13 +94,6 @@ def update(id):
                                name_to_update=name_to_update,
                                id=id
                                )
-
-# Create Form class
-
-
-class NamerForm(FlaskForm):
-    name = StringField("What's your name", validators=[DataRequired()])
-    submit = SubmitField("Submit")
 
 
 @app.route('/user/add', methods=['GET', 'POST'])
@@ -194,3 +174,6 @@ def name():
                            name=name,
                            form=form
                            )
+
+if __name__ == '__main__':
+    app.run(debug=True)
