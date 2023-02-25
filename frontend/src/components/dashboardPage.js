@@ -275,8 +275,8 @@ function DashboardPage() {
         </div>
 
         <div className='claimBtnContainer'>
-            <div className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create New Claim</div>
-            {/* <button className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create new claim</button> */}
+            {/* <div className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create New Claim</div> */}
+            <button className='newClaimBtn' onClick={()=>{setNewClaimTrigger(true)}}>Create new claim</button>
         </div>
         
         <Popup trigger={newClaimTrigger}/>

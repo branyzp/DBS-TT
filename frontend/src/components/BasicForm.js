@@ -47,7 +47,7 @@ const BasicForm = (props) => {
     reset: resetDate,
   } = useInput(isNotEmpty);
 
-  const { reset: resetPolicy } = useInput(isNotEmpty);
+  const {hasError: policyHasError, reset: resetPolicy } = useInput(isNotEmpty);
 
   let formIsValid = false;
 
