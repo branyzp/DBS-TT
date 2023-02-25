@@ -33,6 +33,15 @@ class user(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.firstName
 
+    def json(self):
+        return {
+            "employeeID": self.EmployeeID,
+            "password": self.Password,
+            "firstName": self.FirstName,
+            "lastName": self.LastName,
+            "age": self.Age
+        }
+
 # Insurance Policies Model
 
 
@@ -71,6 +80,28 @@ class insuranceclaims(db.Model):
 @app.route('/')
 def index():
     return os.getenv("DATABASE_URL")
+
+# Login
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    employeeID = request.json['employeeID']
+    password = request.json['password']
+    users = user.query.filter_by(EmployeeID=employeeID).first()
+
+    if users:
+        if users.Password == password:
+            return users.json()
+        else:
+            return "Incorrect password"
+    else:
+        return "Incorrect username"
+    # if user is not None and user.password == password:
+    #     return user
+    # else:
+    #     return "Failure"
+
 
 # get all claims by claimId
 
@@ -144,9 +175,8 @@ def get_users(EmployeeID):
 if __name__ == '__main__':
     app.run(debug=True)
 
+
 # User Model
-
-
 # @app.route('/')
 # def user(name):
 #     return render_template("user.html", user_name=name)
