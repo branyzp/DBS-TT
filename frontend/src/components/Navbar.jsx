@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from 'react-router-dom';
 
 function Header({ isAuthenticated }) {
-	const headerItems = ['Dashboard', 'Claims', 'Logout'];
+	// const headerItems = ['Dashboard', 'Claims', 'Logout'
 
 	//? use navigate to handle routing
 	let navigate = useNavigate();
@@ -30,14 +30,14 @@ function Header({ isAuthenticated }) {
 						Insurance Claims Portal
 					</Navbar.Brand>
 
-					<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					{/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
 
-					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="me-auto">
-							{
-								//? map out header items to generate out clickable links
-							}
-							{isAuthenticated &&
+					{/* <Navbar.Collapse id="basic-navbar-nav">
+						<Nav className="me-auto"> */}
+					{
+						//? map out header items to generate out clickable links
+					}
+					{/* {isAuthenticated &&
 								headerItems.map((element, index) => {
 									return (
 										<Nav.Link
@@ -47,8 +47,8 @@ function Header({ isAuthenticated }) {
 											{element}
 										</Nav.Link>
 									);
-								})}
-							{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+								})} */}
+					{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
 								<NavDropdown.Item href="#action/3.1">
 									dropdown item1
 								</NavDropdown.Item>
@@ -63,8 +63,8 @@ function Header({ isAuthenticated }) {
 									separated dropdown item4
 								</NavDropdown.Item>
 							</NavDropdown> */}
-						</Nav>
-					</Navbar.Collapse>
+					{/* </Nav>
+					</Navbar.Collapse> */}
 				</Container>
 			</Navbar>
 		</div>
