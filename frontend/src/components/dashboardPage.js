@@ -255,10 +255,10 @@ function DashboardPage() {
 			LastEditedClaimDate: '2023-03-11T00:00:00+08:00',
 		},
 	];
-	let [claimsLst, setClaimsLst] = useState(tempLst);
+	const [claimsLst, setClaimsLst] = useState([]);
 	// console.log(claimsLst[0]);
-	let [newClaimTrigger, setNewClaimTrigger] = useState(false);
-
+	const [newClaimTrigger, setNewClaimTrigger] = useState(false);
+	const [isloaded, setIsLoaded] = useState(false)
 	const navigate = useNavigate();
 
 	// let claimsBody = claimsLst && claimsLst.map((claim)=>{
@@ -279,8 +279,8 @@ function DashboardPage() {
 		};
 		fetchData();
 	}, []);
+	return (!isloaded ? <div>Loading...</div> :
 
-	return (
 		<div className="mainContainer">
 			<div className="dashboardMainHeader">
 				{/* <div></div> */}
@@ -316,7 +316,8 @@ function DashboardPage() {
 			<div className="dashboardMainBody">
 				{/* <DashboardItems ClaimID = {claimsLst[0].ClaimID} Status = {claimsLst[0].Status}/>
             <DashboardItems/> */}
-				{claimsLst.map((claim) => {
+				{console.log(claimsLst, '---')}
+				{claimsLst["claims"]?.map((claim) => {
 					return (
 						<DashboardItems
 							className="claimBody"

@@ -35,9 +35,9 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
 				console.log(error);
 				alert(error);
 			});
-		navigate('/dashboard');
-		setIsAuthenticated(true);
-		console.log('username :', username, 'password :', password);
+		// navigate('/dashboard');
+		// setIsAuthenticated(true);
+		// console.log('username :', username, 'password :', password);
 	};
 
 	return (
