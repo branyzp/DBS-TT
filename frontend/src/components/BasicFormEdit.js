@@ -212,6 +212,7 @@ const BasicFormEdit = (props) => {
           })
           console.log(newClaimsLst, "fghjifdygh")
           props.setClaimsLst(newClaimsLst);
+          props.setNewClaimTrigger(false);
         }}>Submit</button>
       </div>
     </form>

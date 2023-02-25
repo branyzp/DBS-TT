@@ -218,6 +218,7 @@ const BasicForm = (props) => {
           // let newList = [...props.claimsLst,newClaim];
           props.setClaimsLst(oldArray => [...oldArray,newClaim]);
           // console.log(newList);
+          props.setNewClaimTrigger(false);
         }}>Submit</button>
       </div>
     </form>
