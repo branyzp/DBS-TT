@@ -190,8 +190,29 @@ const BasicFormEdit = (props) => {
           onChange={handleDropdownChange}
         />
       </div>
+      <button
+          type="button"
+          onClick={() => {
+            props.setNewClaimTrigger(false);
+          }}
+        >
+          Cancel
+        </button>
       <div className="form-actions">
-        <button disabled={!formIsValid}>Submit</button>
+        <button disabled={!formIsValid} onClick={()=>{
+          // claimsLst={claimsLst} setClaimsLst= {setClaimsLst}
+          let newClaimsLst = props.claimsLst.map((claim)=>{
+            if(claim.ClaimID === props.userInEdit.ClaimID){
+              claim.FirstName = firstNameValue;
+              claim.LastName = lastNameValue;
+              claim.Amount = parseFloat(amountValue);
+              claim.Purpose = purposeValue;
+            }
+            return claim
+          })
+          console.log(newClaimsLst, "fghjifdygh")
+          props.setClaimsLst(newClaimsLst);
+        }}>Submit</button>
       </div>
     </form>
   );

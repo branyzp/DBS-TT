@@ -129,6 +129,17 @@ const BasicForm = (props) => {
           <p className="error-text">Please enter a valid date.</p>
         )}
       </div>
+      <div>
+      <button
+          type="button"
+          onClick={() => {
+            props.setNewClaimTrigger(false);
+          }}
+        >
+          Cancel
+        </button>
+      </div>
+
       <div className="form-actions">
         <button disabled={!formIsValid}>Submit</button>
       </div>

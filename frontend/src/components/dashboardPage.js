@@ -285,7 +285,7 @@ function DashboardPage() {
 	// }, []);
 
 	return (
-		<div className="mainContainer">
+		<div className="mainContasubmitiner">
 			<div className="dashboardMainHeader">
 				{/* <div></div> */}
 				<div className="pageTitle">DASHBOARD</div>
@@ -309,7 +309,7 @@ function DashboardPage() {
 				</button>
 			</div>
 
-			<Popup trigger={newClaimTrigger} popupType={popupType} userInEdit={userInEdit} setNewClaimTrigger={setNewClaimTrigger}/>
+			<Popup trigger={newClaimTrigger} popupType={popupType} userInEdit={userInEdit} setNewClaimTrigger={setNewClaimTrigger} claimsLst = {claimsLst} setClaimsLst={setClaimsLst}/>
 
 			{/* <div className="claimBtnContainer">
 				<button className="newClaimBtn">Create new claim</button>
@@ -318,7 +318,8 @@ function DashboardPage() {
 			<div className="dashboardMainBody">
 				{/* <DashboardItems ClaimID = {claimsLst[0].ClaimID} Status = {claimsLst[0].Status}/>
             <DashboardItems/> */}
-            {claimsLst.map((claim)=>{
+            {claimsLst && claimsLst.map((claim)=>{
+                console.log(claimsLst)
                 return <DashboardItems className="claimBody" ClaimID = {claim.ClaimID} Status = {claim.Status} setNewClaimTrigger= {setNewClaimTrigger} setPopupType={setPopupType} setuserInEdit = {setuserInEdit} claimCurrent={claim}/>
                 })}
         </div>
