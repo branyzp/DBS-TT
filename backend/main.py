@@ -70,10 +70,13 @@ def index():
 # get all claims by claimId
 @app.route('/claims/<int:employeeID>')
 def get_claims(employeeID):
-    insuranceID = insurancepolicies.query.filter_by(
-        EmployeeID=employeeID).first().InsuranceID
-    claims = insuranceclaims.query.filter_by(InsuranceID=insuranceID).all()
-    # print(claims)
+    claims = []
+    policies = insurancepolicies.query.filter_by(
+        EmployeeID=employeeID).all()
+
+    for policy in policies:
+        claims += insuranceclaims.query.filter_by(InsuranceID=policy.InsuranceID).all()
+
     return {
         'claims': [
             {
