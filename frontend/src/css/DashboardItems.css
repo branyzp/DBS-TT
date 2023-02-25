@@ -9,13 +9,13 @@
 
 .DashboardItemsContainer{
     /* background-color: grey; */
-    border-width: 1px;
+    /* border-width: 1px;
     border-color:#F4442E;
-    border-style: solid;
+    border-style: solid; */
     background-color: #FFE8D1;
     
-    height: 10%;
-    width: 10%;
+    height: 15%;
+    width: 15%;
 
     margin-top: 10px;
     margin-bottom: 10px;
