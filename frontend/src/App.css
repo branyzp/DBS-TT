@@ -7,6 +7,14 @@
   pointer-events: none;
 }
 
+.formcard {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 5%;
+  max-width: 40%;
+
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
